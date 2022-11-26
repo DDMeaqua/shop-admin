@@ -21,6 +21,8 @@
           text-color="#fff"
           active-text-color="#ffd04b"
           unique-opened
+          router
+          :default-active="activePath"
         >
           <!-- 一级菜单的模板区 -->
           <el-submenu
@@ -34,9 +36,10 @@
             </template>
             <!-- 二级菜单 -->
             <el-menu-item
-              :index="subItem.id + ''"
+              :index="'/' + subItem.path"
               v-for="subItem in item.children"
               :key="subItem.id"
+              @click="saveNavState('/' + subItem.path)"
             >
               <template slot="title">
                 <i class="el-icon-menu"></i>
@@ -47,7 +50,9 @@
         </el-menu>
       </el-aside>
       <!-- 右侧主体内容 -->
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -56,6 +61,7 @@
 export default {
   data() {
     return {
+      // 侧边栏数据
       menulist: [],
       icons: {
         125: "el-icon-s-custom",
@@ -64,11 +70,15 @@ export default {
         102: "el-icon-s-order",
         145: "el-icon-s-data",
       },
+      // 是否折叠
       isCollapse: false,
+      // 保活
+      activePath:''
     };
   },
   created() {
     this.getMenuList();
+    this.activePath = window.sessionStorage.getItem('active')
   },
   methods: {
     // 退出登录
@@ -86,6 +96,11 @@ export default {
     // 侧边栏折叠
     toggle() {
       this.isCollapse = !this.isCollapse;
+    },
+    //  保活 
+    saveNavState(e){
+      window.sessionStorage.setItem('active',e)
+      this.activePath = e
     },
   },
 };
