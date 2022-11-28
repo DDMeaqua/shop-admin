@@ -35,6 +35,7 @@
               <span>{{ item.authName }}</span>
             </template>
             <!-- 二级菜单 -->
+            <!-- index这里是跳转到那页面 -->
             <el-menu-item
               :index="'/' + subItem.path"
               v-for="subItem in item.children"
@@ -91,7 +92,7 @@ export default {
       // console.log(res);
       if (res.meta.status !== 200) return this.$message.error(res.meta.msg);
       this.menulist = res.data;
-      console.log(this.menulist);
+      // console.log(this.menulist);
     },
     // 侧边栏折叠
     toggle() {
@@ -148,7 +149,7 @@ export default {
 }
 
 .el-main {
-  background-color: #ccc;
+  background-color: #fff;
 }
 
 .toggle-button {
