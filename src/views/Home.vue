@@ -112,7 +112,9 @@ export default {
   height: 100%;
 }
 
-.el-aside{
+.el-aside {
+  // background-color: rgb(242, 221, 157);
+  background-color: #545c64;
   transition: 0.5s;
 }
 
@@ -121,6 +123,9 @@ export default {
 }
 
 .el-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
   background-color: rgb(88, 198, 231);
   display: flex;
   justify-content: space-between;
@@ -143,13 +148,8 @@ export default {
   }
 }
 
-.el-aside {
-  // background-color: rgb(242, 221, 157);
-  background-color: #545c64;
-}
-
 .el-main {
-  background-color: #fff;
+  background-color: #eee;
 }
 
 .toggle-button {
