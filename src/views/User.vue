@@ -152,7 +152,6 @@
         title="修改用户"
         :visible.sync="editdialogVisible"
         width="50%"
-        @close="editDialogClosed"
       >
         <el-form
           :model="editForm"
@@ -361,11 +360,11 @@ export default {
       this.editdialogVisible = true;
     },
     // 监听修改用户对话框的关闭事件
-    editDialogClosed() {
+    // editDialogClosed() {
       // console.log(this.editForm);
       // 重置表单
       // this.$refs.editForm.resetFields();
-    },
+    // },
     // 修改用户信息并提交
     editUserInfo() {
       this.$refs.editRef.validate(async (valid) => {

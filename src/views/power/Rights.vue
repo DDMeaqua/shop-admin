@@ -45,7 +45,7 @@ export default {
             }
             this.$message.success('获取权限列表成功')
             this.rightsList = data.data
-            console.log(this.rightsList);
+            // console.log(this.rightsList);
         }
     },
 };

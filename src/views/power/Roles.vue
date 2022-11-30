@@ -11,7 +11,7 @@
     <el-card>
       <el-row>
         <el-col>
-          <el-button type="primary">添加角色</el-button>
+          <el-button @click="addUser" type="primary">添加角色</el-button>
         </el-col>
       </el-row>
 
@@ -108,9 +108,7 @@
       </el-tree>
       <span slot="footer" class="dialog-footer">
         <el-button @click="setRightdialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="allotRights"
-          >确 定</el-button
-        >
+        <el-button type="primary" @click="allotRights">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -125,14 +123,14 @@ export default {
       setRightdialogVisible: false,
       // 所有权限的数据
       rightlist: [],
-      treeProps:{
-        label:'authName',
-        children:'children'
+      treeProps: {
+        label: "authName",
+        children: "children",
       },
       // 默认选中的节点id数组
-      defkeys:[],
+      defkeys: [],
       // 当前即将分配权限的角色id
-      roleId:''
+      roleId: "",
     };
   },
   created() {
@@ -180,7 +178,7 @@ export default {
 
     // 展示分配权限的对话框
     async showSetRightDialog(role) {
-      this.roleId = role.id
+      this.roleId = role.id;
       // console.log(role);
       // 获取所有权限数据
       let { data: res } = await this.$axios.get("rights/tree");
@@ -192,52 +190,61 @@ export default {
       // console.log(this.rolelist);
       // console.log(this.rightlist);
 
-      this.getLeafKeys(role,this.defkeys)
+      this.getLeafKeys(role, this.defkeys);
 
       this.setRightdialogVisible = true;
     },
 
-    // 通过递归获取三级权限的所有id提供给el-tree使用 
-    getLeafKeys(node,arr){
+    // 通过递归获取三级权限的所有id提供给el-tree使用
+    getLeafKeys(node, arr) {
       // 如果不包含children 则是三级节点
-      if(!node.children){
-        return arr.push(node.id)
+      if (!node.children) {
+        return arr.push(node.id);
       }
 
-      node.children.forEach(item => {
-        this.getLeafKeys(item,arr)
+      node.children.forEach((item) => {
+        this.getLeafKeys(item, arr);
       });
     },
 
     // 解决权限列表点击后不清空，点其他角色权限叠加的bug
     // 监听分配权限对话框的关闭事件
-    setRightdialogClosed(){
-      this.defkeys = []
+    setRightdialogClosed() {
+      this.defkeys = [];
     },
 
-// 点击为角色分配权限
-    async allotRights(){
+    // 点击为角色分配权限
+    async allotRights() {
       let keys = [
         ...this.$refs.treeRef.getCheckedKeys(),
-        this.$refs.treeRef.getHalfCheckedKeys()
-      ]
+        this.$refs.treeRef.getHalfCheckedKeys(),
+      ];
 
       // console.log(keys);
 
-      let idStr = keys.join(',')
+      let idStr = keys.join(",");
       // console.log(idStr);
 
-      let {data:res} = await this.$axios.post(`roles/${this.roleId}/rights`,{rids:idStr})
-      if(res.meta.status !== 200){
-        return this.$message.error('修改失败')
+      let { data: res } = await this.$axios.post(
+        `roles/${this.roleId}/rights`,
+        { rids: idStr }
+      );
+      if (res.meta.status !== 200) {
+        return this.$message.error("修改失败");
       }
-      
-      this.$message.success('修改成功')
-      
-      this.getRolesList()
 
-      this.setRightdialogVisible = false
+      this.$message.success("修改成功");
+
+      this.getRolesList();
+
+      this.setRightdialogVisible = false;
     },
+
+    // 添加用户
+    addUser(){
+      
+    },
+
 
   },
 };
