@@ -29,16 +29,24 @@ const routes = [
         component: () => import("../views/User.vue"),
       },
       {
-        path: '/rights',
-        component: () => import('../views/power/Rights.vue'),
+        path: "/rights",
+        component: () => import("../views/power/Rights.vue"),
       },
       {
-        path: '/roles',
-        component: () => import('../views/power/Roles.vue'),
+        path: "/roles",
+        component: () => import("../views/power/Roles.vue"),
       },
       {
-        path: '/categories',
-        component: () => import('../views/goods/Categories.vue'),
+        path: "/categories",
+        component: () => import("../views/goods/Categories.vue"),
+      },
+      {
+        path: "/params",
+        component: () => import("../views/goods/Params.vue"),
+      },
+      {
+        path: "/goods",
+        component: () => import("../views/goods/Goods.vue"),
       },
     ],
   },
