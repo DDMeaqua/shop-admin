@@ -322,9 +322,9 @@ export default {
       );
       if (res.meta.status !== 200) {
         userinfo.mg_state = !userinfo.mg_state;
-        return this.$message.error("用户状态更新失败");
+        return this.$message.error(res.meta.msg);
       }
-      this.$message.success("更新用户状态成功");
+      this.$message.success(res.meta.msg);
       // console.log(res);
     },
     // 监听添加用户对话框的关闭事件
@@ -339,9 +339,9 @@ export default {
         // 成功就发送添加用户请求
         let { data: res } = await this.$axios.post("users", this.addForm);
         if (res.meta.status !== 201) {
-          this.$message.error("添加用户失败");
+          this.$message.error(res.meta.msg);
         }
-        this.$message.success("添加用户成功");
+        this.$message.success(res.meta.msg);
         this.dialogVisible = false;
         this.getUserList();
       });
@@ -377,11 +377,11 @@ export default {
         });
         // console.log(res);
         if (res.meta.status !== 200) {
-          return this.$message.error("修改失败");
+          return this.$message.error(res.meta.msg);
         }
         this.editdialogVisible = false;
         this.getUserList();
-        this.$message.success("修改成功");
+        this.$message.success(res.meta.msg);
       });
     },
     // 通过id删除用户
