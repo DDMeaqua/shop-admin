@@ -79,7 +79,7 @@ export default {
       this.$refs.loginFormRef.validate(async (valid) => {
         if (!valid) return;
         let res = await this.$axios.post("login", this.loginForm);
-        // console.log(res);
+        console.log(res.data);
         if(res.data.meta.status !== 200){
             return this.$message.error('登陆失败了');
         }else{
