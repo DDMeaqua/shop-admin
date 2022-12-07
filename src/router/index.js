@@ -48,6 +48,10 @@ const routes = [
         path: "/goods",
         component: () => import("../views/goods/Goods.vue"),
       },
+      {
+        path: "/goods/add",
+        component: () => import("../views/goods/Add.vue"),
+      }
     ],
   },
 ];
@@ -56,7 +60,7 @@ const router = new VueRouter({
   routes,
 });
 
-// 挂载路由首位
+// 挂载路由守卫
 router.beforeEach((to, from, next) => {
   // to将要访问的路径 from代表从那个路径跳转而来
   // next表示放行next() next('/login') 强制跳转
