@@ -256,7 +256,7 @@ export default {
         this.addForm.goods_cat = this.addForm.goods_cat.join(',') 
         // 处理动态参数
         this.manyTableData.forEach(item => {
-          let newInfo = {attr_id:item.attr_id,attr_value:item.attr_vals.join(',')}
+          let newInfo = {attr_id:item.attr_id,attr_value:item.attr_vals.join(',')}    
           // console.log(newInfo);
           this.addForm.attrs.push(newInfo)
         })
