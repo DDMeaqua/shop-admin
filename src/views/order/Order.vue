@@ -115,7 +115,14 @@
 
           <!-- 物流进度对话框 -->
       <el-dialog title="物流进度" :visible.sync="progressVisible" width="50%">
-
+        <el-timeline>
+    <el-timeline-item
+      v-for="(item, i) in kd.data"
+      :key="i"
+      :timestamp="item.time">
+      {{item.context}}
+    </el-timeline-item>
+  </el-timeline>
       </el-dialog>
 
     </el-card>
